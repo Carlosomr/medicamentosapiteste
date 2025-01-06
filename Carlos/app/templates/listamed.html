@@ -18,7 +18,7 @@
                 const list = document.createElement('ul');
                 result.forEach(medicamento => {
                     const listItem = document.createElement('li');
-                    listItem.textContent = `ID: ${medicamento.id}, Nome: ${medicamento.nome}, Quantidade: ${medicamento.quantidade}, Descrição: ${medicamento.descricao}`;
+                    listItem.textContent = `Medicamento: ${medicamento.nome}, Quantidade: ${medicamento.quantidade}, Descrição: ${medicamento.descricao}`;
                     list.appendChild(listItem);
                 });
                 outputElement.appendChild(list);
@@ -32,7 +32,11 @@
     </script>
 </head>
 <body>
-    <h1>Lista de Medicamentos</h1>
+    <header>
+        <h1>Lista de Medicamentos</h1>
+        <a href="/"><button>Voltar</button></a>
+    </header>
+    
     <div id="output"></div>
 </body>
 </html>

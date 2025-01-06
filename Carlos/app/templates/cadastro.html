@@ -5,40 +5,11 @@
     <title>Medicamentos</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='cadastro.css') }}">
     <script>
-        async function postData(event) {
-            event.preventDefault(); // Evita que o formulário seja submetido da maneira tradicional
-            const nome = document.getElementById('nome').value;
-            const quantidade = document.getElementById('quantidade').value;
-            const descricao = document.getElementById('descricao').value;
 
-            try {
-                const response = await fetch('/api/medicamentos', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        nome: nome,
-                        quantidade: quantidade,
-                        descricao: descricao
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error('Erro ao enviar dados');
-                }
-
-                const result = await response.json();
-                console.log('Dados enviados com sucesso:', result);
-                document.getElementById('output').textContent = 'Dados enviados com sucesso!';
-            } catch (error) {
-                console.error('Erro:', error);
-                document.getElementById('output').textContent = 'Erro ao enviar dados';
-            }
-        }
     </script>
 </head>
 <body>
+    <script src="{{ url_for('static', filename='static/cadastro.js') }}"></script>
     <form onsubmit="postData(event)">
         <label for="nome">Nome do medicamento:</label>
         <input type="text" id="nome" name="nome" required>
@@ -49,8 +20,15 @@
         <label for="descricao">Descrição do medicamento:</label>
         <input type="text" id="descricao" name="descricao">
         <br>
-        <button type="submit">Enviar</button>
+         <div class="buttonform">
+            <button type="submit">Enviar</button>
+            <a href="/lista">Cadastrados</a>
+         </div>
+        
     </form>
-    <div id="output"></div>
+    <main>
+        <div id="output"></div>
+    </main>
+    
 </body>
 </html>
