@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='lista.css') }}">
+    <title>Medicamentos</title>
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch('/api/medicamentos');
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar dados');
+                }
+                const result = await response.json();
+                const outputElement = document.getElementById('output');
+                outputElement.innerHTML = ''; // Limpar conteúdo anterior
+
+                const list = document.createElement('ul');
+                result.forEach(medicamento => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `ID: ${medicamento.id}, Nome: ${medicamento.nome}, Quantidade: ${medicamento.quantidade}, Descrição: ${medicamento.descricao}`;
+                    list.appendChild(listItem);
+                });
+                outputElement.appendChild(list);
+            } catch (error) {
+                console.error('Erro:', error);
+                document.getElementById('output').textContent = 'Erro ao buscar dados';
+            }
+        }
+
+        window.onload = fetchData;
+    </script>
+</head>
+<body>
+    <h1>Lista de Medicamentos</h1>
+    <div id="output"></div>
+</body>
+</html>

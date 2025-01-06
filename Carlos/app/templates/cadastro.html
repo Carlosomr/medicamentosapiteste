@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Medicamentos</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='cadastro.css') }}">
+    <script>
+        async function postData(event) {
+            event.preventDefault(); // Evita que o formulário seja submetido da maneira tradicional
+            const nome = document.getElementById('nome').value;
+            const quantidade = document.getElementById('quantidade').value;
+            const descricao = document.getElementById('descricao').value;
+
+            try {
+                const response = await fetch('/api/medicamentos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nome: nome,
+                        quantidade: quantidade,
+                        descricao: descricao
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erro ao enviar dados');
+                }
+
+                const result = await response.json();
+                console.log('Dados enviados com sucesso:', result);
+                document.getElementById('output').textContent = 'Dados enviados com sucesso!';
+            } catch (error) {
+                console.error('Erro:', error);
+                document.getElementById('output').textContent = 'Erro ao enviar dados';
+            }
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="postData(event)">
+        <label for="nome">Nome do medicamento:</label>
+        <input type="text" id="nome" name="nome" required>
+        <br>
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" id="quantidade" name="quantidade" required>
+        <br>
+        <label for="descricao">Descrição do medicamento:</label>
+        <input type="text" id="descricao" name="descricao">
+        <br>
+        <button type="submit">Enviar</button>
+    </form>
+    <div id="output"></div>
+</body>
+</html>
