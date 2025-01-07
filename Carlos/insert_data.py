@@ -1,11 +1,16 @@
 from app import create_app
 from app.database import db
 from app.models import Medicamento
-
+import oracledb
 app = create_app()
 
 with app.app_context():
     # Lista de medicamentos a serem inseridos
+    conn
+    cursor
+
+    consulta
+    
     medicamentos = [
         Medicamento(nome='Paracetamol', quantidade=100, descricao='Analgésico'),
         Medicamento(nome='Ibuprofeno', quantidade=150, descricao='Anti-inflamatório'),

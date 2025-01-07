@@ -49,3 +49,14 @@ def delete_medicamento(id):
     db.session.delete(medicamento)
     db.session.commit()
     return jsonify({"message": "Medicamento removido com sucesso"}), 200
+
+@app.route('/api/medicamentos/delete', methods=['DELETE'])
+def delete_all_medicamentos():
+    try:
+        num_deleted = Medicamento.query.delete()
+        db.session.commit()
+        return jsonify({"message": f"Todos os {num_deleted} medicamentos foram removidos com sucesso"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"message": "Erro ao deletar medicamentos", "error": str(e)}), 500
+

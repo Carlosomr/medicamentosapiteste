@@ -1,16 +1,15 @@
-
-
 h1 {
     color: #4CAF50;
+    margin: auto;
 }
-header{
+
+header {
     display: flex;
     justify-content: space-between;
 }
 
-#output {
-    margin-top: 20px;
-}
+
+
 button {
     background-color: #4CAF50;
     color: white;
@@ -19,8 +18,35 @@ button {
     border-radius: 4px;
     cursor: pointer;
     margin: 20px;
-
 }
+
 button:hover {
     background-color: #45a049;
 }
+
+#output-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Cria 3 colunas iguais */
+    gap: 5px;
+    width: 500px;
+    margin: auto;
+}
+
+#output-container h2 {
+    font-size: 1.2rem;
+    margin: 0px;
+
+}
+
+.output-grid {
+    display: contents;
+    
+}
+
+.output-grid div {
+    margin-bottom: 10px; /* Espaçamento entre as linhas */
+ 
+
+}
+
+

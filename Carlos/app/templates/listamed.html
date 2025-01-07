@@ -15,13 +15,19 @@
                 const outputElement = document.getElementById('output');
                 outputElement.innerHTML = ''; // Limpar conteúdo anterior
 
-                const list = document.createElement('ul');
                 result.forEach(medicamento => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `Medicamento: ${medicamento.nome}, Quantidade: ${medicamento.quantidade}, Descrição: ${medicamento.descricao}`;
-                    list.appendChild(listItem);
+                    const nomeElement = document.createElement('div');
+                    nomeElement.textContent = medicamento.nome;
+                    outputElement.appendChild(nomeElement);
+
+                    const quantidadeElement = document.createElement('div');
+                    quantidadeElement.textContent = medicamento.quantidade;
+                    outputElement.appendChild(quantidadeElement);
+
+                    const descricaoElement = document.createElement('div');
+                    descricaoElement.textContent = medicamento.descricao;
+                    outputElement.appendChild(descricaoElement);
                 });
-                outputElement.appendChild(list);
             } catch (error) {
                 console.error('Erro:', error);
                 document.getElementById('output').textContent = 'Erro ao buscar dados';
@@ -36,7 +42,11 @@
         <h1>Lista de Medicamentos</h1>
         <a href="/"><button>Voltar</button></a>
     </header>
-    
-    <div id="output"></div>
+    <div id="output-container">
+        <h2 class="header-item">Medicamento</h2>
+        <h2 class="header-item">Quantidade</h2>
+        <h2 class="header-item">Descrição</h2>
+        <div id="output" class="output-grid"></div>
+    </div>
 </body>
 </html>

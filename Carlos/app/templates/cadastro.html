@@ -5,11 +5,38 @@
     <title>Medicamentos</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='cadastro.css') }}">
     <script>
+        async function postData(event) {
+            event.preventDefault(); // Evita o envio do formulário de forma padrão
 
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/api/medicamentos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+
+                const outputElement = document.getElementById('output');
+                if (response.ok) {
+                    outputElement.textContent = 'Medicamento cadastrado com sucesso!';
+                } else {
+                    outputElement.textContent = `Erro: ${result.message}`;
+                }
+            } catch (error) {
+                console.error('Erro:', error);
+                document.getElementById('output').textContent = 'Erro ao enviar dados';
+            }
+        }
     </script>
 </head>
 <body>
-    <script src="{{ url_for('static', filename='static/cadastro.js') }}"></script>
     <form onsubmit="postData(event)">
         <label for="nome">Nome do medicamento:</label>
         <input type="text" id="nome" name="nome" required>
@@ -24,11 +51,9 @@
             <button type="submit">Enviar</button>
             <a href="/lista">Cadastrados</a>
          </div>
-        
     </form>
     <main>
         <div id="output"></div>
     </main>
-    
 </body>
 </html>
