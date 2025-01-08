@@ -2,6 +2,9 @@ from flask import current_app as app
 from flask import jsonify, request, render_template
 from .models import Medicamento
 from .database import db
+@app.route('/administrador', methods=['GET'])
+def administrador():
+    return render_template('administrador.html')
 
 @app.route('/')
 def cadastro():
