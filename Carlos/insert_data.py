@@ -6,10 +6,6 @@ app = create_app()
 
 with app.app_context():
     # Lista de medicamentos a serem inseridos
-    conn
-    cursor
-
-    consulta
     
     medicamentos = [
         Medicamento(nome='Paracetamol', quantidade=100, descricao='Analgésico'),
